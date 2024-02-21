@@ -2,14 +2,20 @@ const Customer = require("../model/customer");
 
 // get customer list
 const getCustomers = (req, res) =>{
+    if (req.isAuthenticated()) {
+        
+        Customer.find()
+        .then(customerList => {
+            res.json(customerList);
+        })
+        .catch( error => {
+            res.send(error);
+        })
 
-    Customer.find()
-    .then(customerList => {
-        res.json(customerList);
-    })
-    .catch( error => {
-        res.send(error);
-    })
+        
+    } else {
+        res.json({ message: 'You are not authenticated' })
+    }
 
 }
 
