@@ -12,7 +12,7 @@ const registerUser = (req, res) => {
             if(err){
                 res.send(err);
             } else {
-                res.send({message: "Successful"})
+                res.send({message: "success"})
             }
         }
     )
@@ -21,21 +21,21 @@ const registerUser = (req, res) => {
 
 
 const loginFailure = (req, res, next) => {
-    console.log(req.session);
-    res.send("Login attempt failed");
+    // console.log(req.session);
+    res.json({message : "failed"});
 
 }
 
 const loginSuccess = (req, res, next) => {
-    console.log(req.session);
-    res.send("Login attempt successful");
+    // console.log(req.session);
+    res.json({message : "success"});
 
 }
 
 const logoutUser = (req, res, next) => {
     req.logout(function(err) {
       if (err) { return next(err); }
-      res.send('Logout successfully');
+      res.json({message : "success"});
     });
 };
 
