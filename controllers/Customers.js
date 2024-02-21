@@ -74,11 +74,25 @@ const deleteCustomer = (req, res) => {
     .catch( error => res.send(error))
 }
 
+// get a single customer detail
+
+const getSingleCustomer = (req, res) => {
+    Customer.findOne(
+        {_id : req.params.custId }
+    )
+    .then((userDetail)=>{
+        res.json(userDetail);
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+}
 
 
 module.exports = {
     getCustomers,
     createCustomer,
     updateCustomer,
-    deleteCustomer
+    deleteCustomer,
+    getSingleCustomer
 }

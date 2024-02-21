@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 
-const { getCustomers,createCustomer,updateCustomer,deleteCustomer } = require("./controllers/Customers");
+const { getCustomers,createCustomer,updateCustomer,deleteCustomer,getSingleCustomer } = require("./controllers/Customers");
 
 router.get("/", (req, res) => {
     res.send("Let's build a CRUD API");
@@ -12,6 +12,8 @@ router.get("/", (req, res) => {
 router.get("/customers", getCustomers);
 
 router.post("/addCustomer", createCustomer);
+
+router.get("/customer/:custId", getSingleCustomer);
 
 router.put("/customer/:custId", updateCustomer);
 
