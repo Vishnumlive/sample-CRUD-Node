@@ -38,7 +38,13 @@ mongoose.connect(process.env.MONGODB_URL, {
 const db = mongoose.connection;
 //console.log(db.client.s.url+" This is the url");
 
-app.use(cors());
+// app.use(cors());
+
+app.use(cors({
+    origin : "http://localhost:3000", 
+    credentials: true, 
+  }));
+
 
 app.use(express.json());
 

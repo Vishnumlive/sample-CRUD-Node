@@ -5,6 +5,15 @@ const { getCustomers,createCustomer,updateCustomer,deleteCustomer,getSingleCusto
 
 const { registerUser,loginFailure, loginSuccess, logoutUser } = require("./controllers/Users");
 
+function checkAuthentication(req,res,next){
+    if(req.isAuthenticated()){
+        
+        next();
+    } else{
+        res.json({ message: 'auth-failed' })
+    }
+}
+
 router.get("/", (req, res) => {
     res.send("Let's build a CRUD API");
 });
@@ -18,14 +27,14 @@ router.get("/login-success", loginSuccess);
 router.post("/logout", logoutUser);
 
 
-router.get("/customers", getCustomers);
+router.get("/customers", checkAuthentication , getCustomers);
 
-router.post("/addCustomer", createCustomer);
+router.post("/addCustomer", checkAuthentication , createCustomer);
 
-router.get("/customer/:custId", getSingleCustomer);
+router.get("/customer/:custId", checkAuthentication , getSingleCustomer);
 
-router.put("/customer/:custId", updateCustomer);
+router.put("/customer/:custId", checkAuthentication , updateCustomer);
 
-router.delete("/deleteCustomer/:custId", deleteCustomer);
+router.delete("/deleteCustomer/:custId", checkAuthentication , deleteCustomer);
 
 module.exports = router;
